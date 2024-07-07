@@ -70,32 +70,47 @@ def leer_archivo():
         print('Archivo no encontrado')
         return None
     
-# Funcion para calcular el promedio usando la libreria statistics
+# Funcion para calcular el promedio 
 def calcular_promedio(datos):
     promedio = statistics.mean(datos)
     # Redondear a dos decimales
     promedio = round(promedio, 2)
     return promedio
 
-# Funcion para calcular la mediana
-
-
-
-
-
+def calcular_mediana(datos):
+    mediana = statistics.median(datos)
+    return mediana
 
 # Funcion para calcular la moda
-
-
-
-
-
+def calcular_moda(datos):
+    try:
+        moda = statistics.mode(datos)
+        return moda
+    except statistics.StatisticsError:
+        # En caso de que haya más de una moda
+        frecuencia = statistics.multimode(datos)
+        return frecuencia
 
 # Main
+datos = leer_archivo()
+if datos:
+    promedio = calcular_promedio(datos)
+    mediana = calcular_mediana(datos)
+    moda = calcular_moda(datos)
+    
+    # Calcular promedio
+    print(f'Promedio: {promedio}')
+    
+    # Calcular mediana
+    print(f'Mediana: {mediana}')
+    
+    # Calcular moda
+    if isinstance(moda, list):
+        print(f'Moda: {", ".join(map(str, moda))}')
+    else:
+        print(f'Moda: {moda}')
+
 datos = leer_archivo()
 promedio = calcular_promedio(datos)
 #calcular promerio
 print(f'Promedio: {promedio}')
-#calcular mediana
-
-#calcular moda
